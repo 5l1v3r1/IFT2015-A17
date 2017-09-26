@@ -27,7 +27,13 @@ package lindenmayer;
 
 import java.awt.geom.Point2D;
 /**
- * Turtle graphics interface. 
+ * Turtle graphics interface. The turtle state is defined as its 
+ * location on the plane and the orientation of its nose. 
+ * Implementing classes are expected to initialize 
+ * the turtle with position (0,0) and angle 0 by default.
+ * The turtle moves and draws by unit-length steps, and turns left or right by a unit angle
+ * (e.g., 30), which are set in {@link #setUnits(double, double) }. 
+ * 
  * 
  * @author Mikl&oacute;s Cs&#369;r&ouml;s
  */
@@ -53,17 +59,28 @@ public interface Turtle
      * Saves turtle state
      */
     public void push();
+    /**
+     * Recovers turtle state
+     */
     public void pop();
+    /**
+     * Lets the turtle relax. 
+     */
     public void stay();
     /**
      * initializes the turtle state (and clears the state stack)
      * @param pos turtle position
      * @param angle_deg angle in degrees (90=up, 0=right)
      */
-    public void init(Point2D position, double angle_deg);
+    public void init(Point2D pos, double angle_deg);
     /**
      * position of the turtle
      * @return position as a 2D point
+     */
+    /**
+     * Turtle position 
+     * 
+     * @return location of the turtle on the plane
      */
     public Point2D getPosition();
     /**
@@ -72,7 +89,8 @@ public interface Turtle
      */
     public double getAngle();
     /**
-     * sets the unit step and turn
+     * sets the unit step and unit angle
+     * 
      * @param step length of an advance (move or draw)
      * @param delta unit angle change in degrees (for turnR and turnL)
      */
